@@ -1,0 +1,6 @@
+selenium
+webdriver_manager
+boto3
+tinq
+BeautifulSoup4
+lxml

@@ -1,0 +1,6 @@
+chromedriver-linux64/
+__pycache__
+rewritten_articles
+scraped_articles
+source_lists
+test.py
