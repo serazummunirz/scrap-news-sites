@@ -51,25 +51,7 @@ wait = WebDriverWait(driver, 30)
 
 if setup_proxy:
     ProxySwitch.setup_proxy(driver, By)
-    driver.get("https://ifconfig.me/ip")
-    time.sleep(10)
-    try:
-        body_text = driver.find_element(By.XPATH, "//pre").text
-    except:
-        body_text = 'None'
-    print(body_text)
-    print("\n")
-    print("Testing proxy connection.")
-    if os.environ['PROXY_HOST'] == body_text:
-        print("\n\n")
-        print("Proxy connected successfully. Please restart the script to start scraping.")
-        driver.close()
-    else:
-        print("\n\n")
-        driver.close()
-        
-        shutil.rmtree(chrome_profile)
-        print("Proxy connection unsuccessful. Please restart the script and check your proxy config.")
+    time.sleep(60)
     exit()
 
 

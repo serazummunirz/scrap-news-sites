@@ -19,6 +19,7 @@ def setup_proxy(driver, By):
         if window != first_window:
             proxy_window = driver.current_window_handle
             driver.switch_to.window(window)
+            time.sleep(2)
             driver.find_elements(By.XPATH, '//button[@class="btn btn-default ng-binding"]')[1].click()
             driver.find_element(By.XPATH, '//span[@omega-profile-inline="profile"]').click()
             driver.find_element(By.XPATH, '//option[@label="HTTP"]').click()
@@ -37,6 +38,10 @@ def setup_proxy(driver, By):
             driver.find_element(By.XPATH, '//a[@ng-click="applyOptions()"]').click()
             time.sleep(0.5)
             driver.get("chrome-extension://padekgcemlokbadohgkifijomclgjgif/popup/index.html#")
-            driver.find_element(By.XPATH, '//a[@id="js-profile-1"]').click()
+            time.sleep(3)
+            try:
+                driver.find_element(By.XPATH, '//a[@id="js-profile-1"]').click()
+            except:
+                pass
             main_window = driver.window_handles
             driver.switch_to.window(first_window)
