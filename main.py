@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 
 
-chrome_profile = "/root/Documents/chrome_profile"
+chrome_profile = "C:\\Users\\Administrator\\chrome_profile"
 
 if not os.path.exists(chrome_profile):
     try:
@@ -23,7 +23,7 @@ if not os.path.exists(chrome_profile):
         pass
 
 
-chrome_options = Options()
+chrome_options = webdriver.ChromeOptions()
 
 
 if os.environ['DISABLE_PROXY'] == 'yes':
@@ -41,15 +41,11 @@ else:
         setup_proxy = True
 
 
-chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument(f'--user-data-dir={chrome_profile}')
 chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument('--headless')
-# chrome_options.add_extension('proxy_extension.crx')
 
 
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-# driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=chrome_options)
 wait = WebDriverWait(driver, 30)
 
 
@@ -102,7 +98,6 @@ pagesize = 50
 file_name = f"{search_year}{search_month}{search_date}-{keyword}.txt"
 folder_name = f"{search_year}{search_month}{search_date}/{keyword}"
 
-# scraped_article_s3_path = f"scraped_articles/{folder_name}"
 
 scraped_articles_folder_name = f"scraped_articles/{folder_name}"
 rewritten_articles_folder_name = f"rewritten_articles/{folder_name}"
@@ -182,8 +177,8 @@ def main():
     scrap_links_from_all_sites()
     scrap_articles_from_all_links()
     upload_scraped_articles_to_s3()
-    rewrite_articles()
-    upload_rewritted_article_to_s3()
+    # rewrite_articles()
+    # upload_rewritted_article_to_s3()
     driver.close()
 
 

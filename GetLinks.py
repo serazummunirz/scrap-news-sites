@@ -55,8 +55,7 @@ def sec_links(driver, wait, keyword, search_date, search_month, search_year, fil
     month_number = MonthNumber.get_month_number
     url_month = month_number(search_month)
 
-    # url = f"https://www.sec.gov/news/pressreleases?aId=&combine={keyword}&year={search_year}&month={url_month}"
-    url = f"https://www.sec.gov/news/pressreleases?aId=&combine=a"
+    url = f"https://www.sec.gov/news/pressreleases?aId=&combine={keyword}&year={search_year}&month={url_month}"
 
     driver.get(url)
     source_code = driver.page_source
@@ -74,18 +73,18 @@ def sec_links(driver, wait, keyword, search_date, search_month, search_year, fil
             date_posted = odd_element.find('time', {"class": "datetime"}).text
             splited_date_posted = date_posted.split(",")
             actual_date_posted = f"{splited_date_posted[0].split()[0][:3].upper()} {splited_date_posted[0].split()[1]} {splited_date_posted[1].strip()}"
-            # if actual_date_posted == searched_date:
-            base_url = "https://www.sec.gov"
-            article_url = odd_element.find('a', {"hreflang": "en"}).get('href')
-            full_url = base_url + article_url
-            print(actual_date_posted)
-            print(full_url)
+            if actual_date_posted == searched_date:
+                base_url = "https://www.sec.gov"
+                article_url = odd_element.find('a', {"hreflang": "en"}).get('href')
+                full_url = base_url + article_url
+                print(actual_date_posted)
+                print(full_url)
 
-            with open(file_name, "a") as f:
-                f.write(full_url + '\n')
-                total_scraped += 1
-            # else:
-            #     break
+                with open(file_name, "a") as f:
+                    f.write(full_url + '\n')
+                    total_scraped += 1
+            else:
+                break
         else:
             break
 
@@ -95,18 +94,18 @@ def sec_links(driver, wait, keyword, search_date, search_month, search_year, fil
             date_posted = odd_element.find('time', {"class": "datetime"}).text
             splited_date_posted = date_posted.split(",")
             actual_date_posted = f"{splited_date_posted[0].split()[0][:3].upper()} {splited_date_posted[0].split()[1]} {splited_date_posted[1].strip()}"
-            # if actual_date_posted == searched_date:
-            base_url = "https://www.sec.gov"
-            article_url = odd_element.find('a', {"hreflang": "en"}).get('href')
-            full_url = base_url + article_url
-            print(actual_date_posted)
-            print(full_url)
+            if actual_date_posted == searched_date:
+                base_url = "https://www.sec.gov"
+                article_url = odd_element.find('a', {"hreflang": "en"}).get('href')
+                full_url = base_url + article_url
+                print(actual_date_posted)
+                print(full_url)
 
-            with open(file_name, "a") as f:
-                f.write(full_url + '\n')
-                total_scraped += 1
-            # else:
-            #     break
+                with open(file_name, "a") as f:
+                    f.write(full_url + '\n')
+                    total_scraped += 1
+            else:
+                break
         else:
             break
 
