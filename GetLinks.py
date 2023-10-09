@@ -201,35 +201,42 @@ def businesswire_links(driver, wait, EC, By, keyword, search_date, search_month,
 
         if total_scraped < int(total_articles):
 
-            url = f"https://www.businesswire.com/portal/site/home/search/?searchType=news&searchTerm={keyword}&searchPage={page}"
-            driver.get(url)
-            time.sleep(3)
+            while True:
+                try:
 
-            page_source = driver.page_source
+                    url = f"https://www.businesswire.com/portal/site/home/search/?searchType=news&searchTerm={keyword}&searchPage={page}"
+                    driver.get(url)
+                    time.sleep(3)
 
-            soup = BeautifulSoup(page_source, "html.parser")
-            if page > 1:
-                inner_tables = soup.findAll('ul', {'class': 'bw-news-list'})[0]
-            else:
-                inner_tables = soup.findAll('ul', {'class': 'bw-news-list'})[1]
-            
-            all_news = inner_tables.findAll('li')
-            for news in all_news:
-                if total_scraped < int(total_articles):
-                    searched_date = f"{search_month} {search_date} {search_year}"
-                    date_posted = news.find('time').getText()
-                    splited_date_posted = date_posted.split(",")
-                    month_formatted = splited_date_posted[0].split()[0]
-                    date_formatted = splited_date_posted[0].split()[1]
-                    actual_date_posted = f"{month_formatted[:3].upper()} {date_formatted} {splited_date_posted[1].strip()}"
-                    if actual_date_posted == searched_date:                                        
-                        article_url = news.find('a').get('href')
-                        print(article_url)
-                        with open(file_name, "a") as f:
-                                f.write(article_url + '\n')
-                        total_scraped += 1
-                else:
+                    page_source = driver.page_source
+
+                    soup = BeautifulSoup(page_source, "html.parser")
+                    if page > 1:
+                        inner_tables = soup.findAll('ul', {'class': 'bw-news-list'})[0]
+                    else:
+                        inner_tables = soup.findAll('ul', {'class': 'bw-news-list'})[1]
+                    
+                    all_news = inner_tables.findAll('li')
+                    for news in all_news:
+                        if total_scraped < int(total_articles):
+                            searched_date = f"{search_month} {search_date} {search_year}"
+                            date_posted = news.find('time').getText()
+                            splited_date_posted = date_posted.split(",")
+                            month_formatted = splited_date_posted[0].split()[0]
+                            date_formatted = splited_date_posted[0].split()[1]
+                            actual_date_posted = f"{month_formatted[:3].upper()} {date_formatted} {splited_date_posted[1].strip()}"
+                            if actual_date_posted == searched_date:                                        
+                                article_url = news.find('a').get('href')
+                                print(article_url)
+                                with open(file_name, "a") as f:
+                                        f.write(article_url + '\n')
+                                total_scraped += 1
+                        else:
+                            break
                     break
+                    
+                except:
+                    pass
         else:
             break
 

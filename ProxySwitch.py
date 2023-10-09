@@ -20,7 +20,12 @@ def setup_proxy(driver, By):
             proxy_window = driver.current_window_handle
             driver.switch_to.window(window)
             time.sleep(2)
-            driver.find_elements(By.XPATH, '//button[@class="btn btn-default ng-binding"]')[1].click()
+            while True:
+                try:
+                    driver.find_elements(By.XPATH, '//button[@class="btn btn-default ng-binding"]')[1].click()
+                    break
+                except:
+                    pass
             driver.find_element(By.XPATH, '//span[@omega-profile-inline="profile"]').click()
             driver.find_element(By.XPATH, '//option[@label="HTTP"]').click()
             driver.find_element(By.XPATH, '//input[@type="text"]').clear()
