@@ -190,66 +190,7 @@ def lseg_links(driver, wait, EC, By, keyword, search_date, search_month, search_
         else:
             break
 
-
-
-# def businesswire_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, file_name, pagesize, page_range, total_articles, WebDriverWait):
-
-#     page = 1
-
-#     total_scraped = 0
-
-#     for _ in range(page_range):
-
-#         if total_scraped < int(total_articles):
-
-#             url = f"https://www.businesswire.com/portal/site/home/search/?searchType=news&searchTerm={keyword}&searchPage={page}"
-#             driver.get(url)
-#             time.sleep(3)
-
-#             while True:
-
-#                 if total_scraped < int(total_articles):
-
-#                     page_source = driver.page_source
-#                     soup = BeautifulSoup(page_source, "html.parser")
-#                     inner_tables = soup.findAll('ul', {'class': 'bw-news-list'})
-#                     if len(inner_tables) > 0:
-#                         for inner_table in inner_tables:
-#                             if total_scraped < int(total_articles):
-#                                 tables = inner_table.findAll('li')
-#                                 for table in tables:
-#                                     print(table)
-#                                     if total_scraped < int(total_articles):
-#                                         searched_date = f"{search_month} {search_date} {search_year}"
-#                                         date_posted = table.find('time').text
-#                                         splited_date_posted = date_posted.split(",")
-#                                         month_date_splitted = splited_date_posted[0].split()[0]
-#                                         month_formatted = splited_date_posted[0].split()[0]
-#                                         date_formatted = splited_date_posted[0].split()[1]
-#                                         actual_date_posted = f"{month_formatted[:3].upper()} {date_formatted} {splited_date_posted[1].strip()}"
-#                                         print(actual_date_posted)
-#                                         if actual_date_posted == searched_date:                                        
-#                                             article_url = table.find('a').get('href')
-#                                             print(article_url)
-#                                             with open(file_name, "a") as f:
-#                                                     f.write(article_url + '\n')
-#                                             total_scraped += 1
-#                                         else:
-#                                             break
-#                                     else:
-#                                         break
-#                             else:
-#                                 break
-#                         break
-#                     else:
-#                         break
-#                 else:
-#                     break
-
-#             page += 1
-#         else:
-#             break
-
+            
 
 def businesswire_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, file_name, pagesize, page_range, total_articles, WebDriverWait):
 
@@ -282,8 +223,6 @@ def businesswire_links(driver, wait, EC, By, keyword, search_date, search_month,
                     month_formatted = splited_date_posted[0].split()[0]
                     date_formatted = splited_date_posted[0].split()[1]
                     actual_date_posted = f"{month_formatted[:3].upper()} {date_formatted} {splited_date_posted[1].strip()}"
-                    # print(f"Searched date: {searched_date}")
-                    # print(f"Date posted: {actual_date_posted}")
                     if actual_date_posted == searched_date:                                        
                         article_url = news.find('a').get('href')
                         print(article_url)
