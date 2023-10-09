@@ -52,6 +52,7 @@ wait = WebDriverWait(driver, 30)
 if setup_proxy:
     ProxySwitch.setup_proxy(driver, By)
     driver.get("https://ifconfig.me/ip")
+    time.sleep(10)
     try:
         body_text = driver.find_element(By.XPATH, "//pre").text
     except:
@@ -66,7 +67,7 @@ if setup_proxy:
     else:
         print("\n\n")
         driver.close()
-        time.sleep(1)
+        
         shutil.rmtree(chrome_profile)
         print("Proxy connection unsuccessful. Please restart the script and check your proxy config.")
     exit()
