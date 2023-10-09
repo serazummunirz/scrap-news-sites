@@ -29,12 +29,12 @@ chrome_options = Options()
 if os.environ['DISABLE_PROXY'] == 'yes':
     shutil.rmtree(chrome_profile)
     os.mkdir(chrome_profile)
-    chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--headless')
     setup_proxy = False
 
 else:
     if len(os.listdir(chrome_profile)) > 0:
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         setup_proxy = False
     else:
         chrome_options.add_extension('proxy_extension.crx')
@@ -116,7 +116,7 @@ source_list_s3_path = f"{source_list_folder_name}/{file_name}"
 # Defining main function
 def main():
 
-    AwsFunctions.create_bucket()
+    # AwsFunctions.create_bucket()
 
 
     def create_initial_files_structure():
