@@ -10,7 +10,10 @@ def scrap_articles(driver, wait, EC, By, file_name, scraped_articles_folder_name
 
             if link_site == "prnewswire":
                 driver.get(link)
-                article = wait.until(EC.presence_of_element_located((By.XPATH, '//article[@class="news-release inline-gallery-template"]'))).text
+                try:
+                    article = wait.until(EC.presence_of_element_located((By.XPATH, '//article[@class="news-release inline-gallery-template"]'))).text
+                except:
+                    article = wait.until(EC.presence_of_element_located((By.XPATH, '//article[@class="news-release static-gallery-template"]'))).text
                 print(link)
                 print(article)
                 print("\n\n\n\n")
