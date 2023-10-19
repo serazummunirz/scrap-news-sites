@@ -178,12 +178,12 @@ def main():
 
 
     create_initial_files_structure()
-    remove_old_file()
-    scrap_links_from_all_sites()
+    # remove_old_file()
+    # scrap_links_from_all_sites()
     scrap_articles_from_all_links()
-    upload_scraped_articles_to_s3()
-    rewrite_articles()
-    upload_rewritted_article_to_s3()
+    # upload_scraped_articles_to_s3()
+    # rewrite_articles()
+    # upload_rewritted_article_to_s3()
     driver.close()
 
 
