@@ -94,7 +94,7 @@ source_list_s3_path = f"{source_list_folder_name}/{file_name}"
 # Defining main function
 def main():
 
-    AwsFunctions.create_bucket()
+    # AwsFunctions.create_bucket()
 
 
     def create_initial_files_structure():
@@ -112,20 +112,28 @@ def main():
     
 
     def scrap_links_from_all_sites():
+        try:
+            prnewswire_links = GetLinks.prnewswire_links
+            prnewswire_links(driver, wait, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        except:
+            pass
 
-        prnewswire_links = GetLinks.prnewswire_links
-        prnewswire_links(driver, wait, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
-
-        sec_links = GetLinks.sec_links
-        sec_links(driver, wait, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        try:
+            sec_links = GetLinks.sec_links
+            sec_links(driver, wait, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        except:
+            pass
 
         # lseg_links = GetLinks.lseg_links
         # lseg_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
 
-        businesswire_links = GetLinks.businesswire_links
-        businesswire_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        try:
+            businesswire_links = GetLinks.businesswire_links
+            businesswire_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        except:
+            pass
 
-        AwsFunctions.upload_file_to_s3(source_list_local_path, source_list_s3_path)
+        # AwsFunctions.upload_file_to_s3(source_list_local_path, source_list_s3_path)
 
 
     def scrap_articles_from_all_links():
@@ -159,7 +167,7 @@ def main():
     remove_old_file()
     scrap_links_from_all_sites()
     scrap_articles_from_all_links()
-    upload_scraped_articles_to_s3()
+    # upload_scraped_articles_to_s3()
     # rewrite_articles()
     # upload_rewritted_article_to_s3()
     driver.close()
