@@ -46,8 +46,8 @@ def scrap_articles(driver, wait, EC, By, file_name, scraped_articles_folder_name
                     print("\n\n\n\n")
 
                 article_name = article[:30].strip(" ")
-
-                scraped_file_name = f"{scraped_articles_folder_name}/{article_name}.txt"
+                clean_article_name = article_name.replace(' ', '-').lower()
+                scraped_file_name = f"{scraped_articles_folder_name}/{clean_article_name}.txt"
                 print(scraped_file_name)
 
                 with open(scraped_file_name, 'a') as f:
