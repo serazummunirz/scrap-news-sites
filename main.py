@@ -29,12 +29,12 @@ chrome_options = webdriver.ChromeOptions()
 if os.environ['DISABLE_PROXY'] == 'yes':
     shutil.rmtree(chrome_profile)
     os.mkdir(chrome_profile)
-    chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--headless')
     setup_proxy = False
 
 else:
     if len(os.listdir(chrome_profile)) > 0:
-        chrome_options.add_argument('--headless')
+        #chrome_options.add_argument('--headless')
         setup_proxy = False
     else:
         chrome_options.add_extension('proxy_extension.crx')
@@ -124,8 +124,11 @@ def main():
         except:
             pass
 
-        # lseg_links = GetLinks.lseg_links
-        # lseg_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        try:
+            lseg_links = GetLinks.lseg_links
+            lseg_links(driver, wait, EC, By, keyword, search_date, search_month, search_year, source_list_local_path, pagesize, page_range, total_articles, WebDriverWait)
+        except:
+            pass
 
         try:
             businesswire_links = GetLinks.businesswire_links
